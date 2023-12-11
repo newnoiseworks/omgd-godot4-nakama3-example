@@ -1,0 +1,4 @@
+omgd:
+  gcp:
+    project: your-project-name
+    zone: us-east1-c
