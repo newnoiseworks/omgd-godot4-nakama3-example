@@ -16,19 +16,24 @@ services:
   build-mac:
     extends:
       service: build-root
-    command: sh -c "mkdir -v -p dist/mac && godot -v --export 'Mac OSX' dist/mac/game.zip"
+    command: sh -c "mkdir -v -p dist/mac && godot -v --headless --export-release 'macOS' dist/mac/game.zip"
 
   build-windows:
     extends:
       service: build-root
-    command: sh -c "mkdir -v -p dist/windows && godot -v --export 'Windows Desktop' dist/windows/game.exe"
+    command: sh -c "mkdir -v -p dist/windows && godot -v --headless --export-release 'Windows Desktop' dist/windows/game.exe"
 
   build-web:
     extends:
       service: build-root
-    command: sh -c "mkdir -v -p dist/web && godot -v --export 'HTML5' dist/web/index.html"
+    command: sh -c "mkdir -v -p dist/web && godot -v --headless --export-release 'Web' dist/web/index.html"
 
   build-x11:
     extends:
       service: build-root
-    command: sh -c "mkdir -v -p dist/x11 && godot -v --export 'Linux/X11' dist/x11/game.x86_64"
+    command: sh -c "mkdir -v -p dist/x11 && godot -v --headless --export-release 'Linux/X11' dist/x11/game.x86_64"
+
+  build-x11-server:
+    extends:
+      service: build-root
+    command: sh -c "mkdir -v -p dist/x11-server && godot -v --headless --export-pack 'Linux/X11' dist/x11-server/game.pck"

@@ -4,7 +4,7 @@ omgd:
     - build-service: build-web
       copy: game/dist/web
       to: servers/web-build/src
-  name: godot4-nakama3-example
+  name: omgd-godot4-nakama3-example
   servers:
     ports:
       tcp: '"22", "3030", "7348-7351"'
