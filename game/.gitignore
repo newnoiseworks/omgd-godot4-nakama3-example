@@ -3,6 +3,7 @@ debug.log
 
 # Godot-specific ignores
 .import/
+.godot/
 export.cfg
 
 dist/*
