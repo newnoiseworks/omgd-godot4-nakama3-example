@@ -1,14 +1,14 @@
 omgd:
   game:
     targets:
-    - build-service: build-web
-      copy: game/dist/web
-      to: servers/web-build/src
+      - build-service: build-web
+        copy: game/dist/web
+        to: servers/web-build/src
   name: omgd-godot4-nakama3-example
   servers:
     ports:
       tcp: '"22", "3030", "7348-7351"'
       udp: '"7348-7351"'
     services:
-    - nakama
-    - web
+      - build-service: nakama
+      - build-service: web
