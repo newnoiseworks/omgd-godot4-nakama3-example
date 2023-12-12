@@ -20,4 +20,5 @@ func _physics_process(_delta: float):
 	if (target.distance_to(position) > INPUT_MOVE - 5):
 		PlayerEvent.movement({"x": target.x, "y": target.y})
 
+	super(_delta)
 

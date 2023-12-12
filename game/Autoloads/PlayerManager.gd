@@ -9,33 +9,29 @@ func connect_socket():
 		return
 
 	socket = Nakama.create_socket_from(SessionManager.client)
-	yield(socket.connect_async(SessionManager.session), "completed")
-	var _cr = socket.connect("received_match_state", self, "_on_match_state")
-	var _cc = socket.connect("closed", self, "_on_socket_disconnect")
+	await socket.connect_async(SessionManager.session)
+	var _cr = socket.connect("received_match_state", Callable(self, "_on_match_state"))
+	var _cc = socket.connect("closed", Callable(self, "_on_socket_disconnect"))
 
 
 func find_or_create_match(label: String, starting_position: Vector2):
-	var response = yield(
-		SessionManager.rpc_async("find_or_create_player", "player_type"), "completed"
-	)
+	var response = await SessionManager.rpc_async("find_or_create_player", "player_type")
 
 	var match_id = response.payload.replace('"', "")
 
-	var _match = yield(_join_match(match_id, label, starting_position), "completed")
+	var _match = await _join_match(match_id, label, starting_position)
 
 	return _match
 
 
 func leave_match():
 	if game_match != null:
-		yield(socket.leave_match_async(game_match.match_id), "completed")
+		await socket.leave_match_async(game_match.match_id)
 		game_match = null
-	else:
-		yield()
 
 
 func _join_match(match_id: String, _label: String, _starting_position: Vector2) -> NakamaRTAPI.Match:
-	game_match = yield(socket.join_match_async(match_id), "completed")
+	game_match = await socket.join_match_async(match_id)
 
 	if game_match.is_exception():
 		print("An error occured attempting to join the match: %s" % game_match)

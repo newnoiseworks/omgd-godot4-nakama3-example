@@ -4,10 +4,10 @@ enum {
   MOVEMENT = 0,
 }
 
-signal movement(state, presence)
+signal movement_signal(state, presence)
 
 var signal_map = {
-	MOVEMENT: "movement",
+	MOVEMENT: movement_signal,
 }
 
 
@@ -17,12 +17,12 @@ func handle_match_state_update(state: NakamaRTAPI.MatchData):
 
 	match state.op_code:
 		MOVEMENT:
-			emit_signal("movement", state.data, state.presence)
+			emit_signal("movement_signal", state.data, state.presence)
 
 
 func emit(op_code: int, payload: String):
-	var event: String = signal_map[op_code]
-	emit_signal(event, payload, {"user_id": SessionManager.session.user_id})
+	var event: Signal = signal_map[op_code]
+	event.emit(payload, {"user_id": SessionManager.session.user_id})
 
 	if PlayerManager.game_match != null:
 		PlayerManager.socket.send_match_state_async(
@@ -31,4 +31,4 @@ func emit(op_code: int, payload: String):
 
 
 func movement(payload):
-	emit(MOVEMENT, JSON.print(payload))
+	emit(MOVEMENT, JSON.stringify(payload))

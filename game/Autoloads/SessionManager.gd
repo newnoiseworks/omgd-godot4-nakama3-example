@@ -6,7 +6,7 @@ var api_account: NakamaAPI.ApiAccount
 
 signal post_auth
 
-onready var client = Nakama.create_client(
+@onready var client = Nakama.create_client(
 	GameConfig.nakama_key,
 	GameConfig.nakama_host,
 	GameConfig.nakama_port,
@@ -15,7 +15,7 @@ onready var client = Nakama.create_client(
 
 
 func rpc_async(uri: String, payload: String = "") -> NakamaAPI.ApiRpc:
-	return yield(client.rpc_async(session, uri, payload), "completed")
+	return await client.rpc_async(session, uri, payload)
 
 
 func login(email: String, password: String):
@@ -27,7 +27,7 @@ func login(email: String, password: String):
 			"https" if GameConfig.nakama_secure else "http"
 		)
 
-	session = yield(client.authenticate_email_async(email, password), "completed")
+	session = await client.authenticate_email_async(email, password)
 	emit_signal("post_auth")
 
 	return session
@@ -42,7 +42,7 @@ func signup(email: String, username: String, password: String):
 			"https" if GameConfig.nakama_secure else "http"
 		)
 
-	session = yield(client.authenticate_email_async(email, password, username, true), "completed")
+	session = await client.authenticate_email_async(email, password, username, true)
 	emit_signal("post_auth")
 
 	return session

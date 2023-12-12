@@ -1,8 +1,8 @@
 extends Control
 
-onready var login_container: Container = $Login
-onready var signup_container: Container = $Signup
-onready var label: Label = $Label
+@onready var login_container: Container = $Login
+@onready var signup_container: Container = $Signup
+@onready var label: Label = $Label
 
 
 func _ready():
@@ -25,8 +25,8 @@ func show_signup():
 	show_login_or_signup(false)
 
 
-func show_login_or_signup(show_login: bool):
-	if show_login:
+func show_login_or_signup(_show_login: bool):
+	if _show_login:
 		login_container.show()
 		signup_container.hide()
 	else:

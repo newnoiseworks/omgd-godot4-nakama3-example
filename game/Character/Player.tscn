@@ -1,15 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://diichcftp4q44"]
 
-[ext_resource path="res://Character/Character.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Character/r1174it7zth51.png" type="Texture" id=2]
-[ext_resource path="res://Character/PlayerController.gd" type="Script" id=3]
+[ext_resource type="PackedScene" uid="uid://dafc3fj8eny41" path="res://Character/Character.tscn" id="1"]
+[ext_resource type="Texture2D" uid="uid://bmnd2x6y0v6v" path="res://Character/r1174it7zth51.png" id="2"]
+[ext_resource type="Script" path="res://Character/PlayerController.gd" id="3"]
 
-[node name="Player" instance=ExtResource( 1 )]
-script = ExtResource( 3 )
+[node name="Player" instance=ExtResource("1")]
+script = ExtResource("3")
 
 [node name="Godot_icon" parent="." index="2"]
-texture = ExtResource( 2 )
-
-[node name="Camera2D" type="Camera2D" parent="." index="4"]
-
-[node name="MovementPing" type="Timer" parent="." index="5"]
+texture = ExtResource("2")

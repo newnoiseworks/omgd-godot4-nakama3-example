@@ -4,9 +4,9 @@ var username: String
 var email: String
 var password: String
 
-onready var version_incorrect_modal: WindowDialog = $VersionIncorrect
+@onready var version_incorrect_modal: Window = $VersionIncorrect
 
-export var game_scene: PackedScene
+@export var game_scene: PackedScene
 
 
 func username_text_changed(new_text: String):
@@ -22,7 +22,7 @@ func password_text_changed(new_text: String):
 
 
 func login_button_pressed():
-	var session = yield(SessionManager.login(email, password), "completed")
+	var session = await SessionManager.login(email, password)
 
 	handle_post_login(session.valid)
 
@@ -30,9 +30,7 @@ func login_button_pressed():
 func sign_up_button_pressed():
 	# var session = yield(SessionManager.signup(email, username, password), "completed")
 
-	var session = yield(
-		SessionManager.signup("%s@wow.com" % username, username, "password"), "completed"
-	)
+	var session = await SessionManager.signup("%s@wow.com" % username, username, "password")
 
 	handle_post_login(session.valid)
 
@@ -40,7 +38,7 @@ func sign_up_button_pressed():
 func handle_post_login(login_successful: bool):
 	if login_successful:
 		get_parent().get_parent().queue_free()
-		get_tree().get_root().call_deferred("add_child", game_scene.instance())
+		get_tree().get_root().call_deferred("add_child", game_scene.instantiate())
 		print("logged in!")
 	else:
 		print("auth failed!")
