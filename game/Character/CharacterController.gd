@@ -17,7 +17,6 @@ func _exit_tree():
 
 func _physics_process(_delta):
 	if position.distance_to(target) > 5:
-		print_debug(position, target)
 		velocity = position.direction_to(target) * SPEED
 		move_and_slide()
 
