@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dafc3fj8eny41"]
 
-[ext_resource type="Texture2D" uid="uid://fuvp0a6uxguk" path="res://Character/Godot_icon.svg" id="1"]
+[ext_resource type="Texture2D" uid="uid://ft53r8v55l7t" path="res://Character/Godot_icon.svg" id="1"]
 [ext_resource type="Script" path="res://Character/CharacterController.gd" id="2"]
 
 [sub_resource type="RectangleShape2D" id="1"]
