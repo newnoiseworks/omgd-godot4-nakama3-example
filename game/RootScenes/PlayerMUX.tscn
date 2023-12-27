@@ -7,3 +7,10 @@
 [node name="Experience" instance=ExtResource("2")]
 script = ExtResource("1")
 character_scene = ExtResource("3")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." index="2"]
+offset_left = 488.0
+offset_top = 10.0
+offset_right = 822.0
+offset_bottom = 124.0
+text = "WASD = movement"
